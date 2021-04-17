@@ -16,12 +16,28 @@ class UniversalSolutionCli < Thor
       us = UniversalSolution.new()
       result_hash, max_av = us.universal_solutions(s)
       puts("max_average value is: #{max_av}")
-      puts("Possible solutions(#{result_hash[max_av].length()} available | showing #{options[:max_show]}): ")
+      puts("Possible solutions(#{result_hash[max_av].length()} available | try showing #{options[:max_show]}): ")
       result_hash[max_av][0..options[:max_show]].each do |solution|
 	puts("\t#{solution.to_s} ==>\t#{solution.join()}")
       end
       puts()
     end
+  end
+  
+  desc "usf BOT_STRING", "run universal solutions on BOT_STRING"
+  option :max_show, type: :numeric, default: 10
+  def us(bot_string)
+    s = bot_string
+    puts("Bot String: #{s}")
+    s = s.split('')
+    us = UniversalSolution.new()
+    result_hash, max_av = us.universal_solutions(s)
+    puts("max_average value is: #{max_av}")
+    puts("Possible solutions(#{result_hash[max_av].length()} available | try showing #{options[:max_show]}): ")
+    result_hash[max_av][0..options[:max_show]].each do |solution|
+      puts("\t#{solution.to_s} ==>\t#{solution.join()}")
+    end
+    puts()
   end
 end
 
